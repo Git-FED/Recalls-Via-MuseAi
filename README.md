@@ -18,7 +18,7 @@ There is no hosted live demo or production backend in this repository. The inclu
 
 ### Real local demo
 
-![Muse AI Recall local demo showing the landing page, recall page, and personal check surface](assets/demo/demo.gif)
+<p><img src="assets/demo/demo.gif" alt="Muse AI Recall local demo cycling through the landing page, recall page, and personal check surface" width="960"></p>
 
 ### Quickest working path
 
@@ -36,23 +36,26 @@ These captures were taken from the actual local pages in this repository.
 
 ### Landing page
 
-![Muse AI Recall landing page with the product promise and navigation](assets/screenshots/home.png)
+<p><img src="assets/readme/home.jpg" alt="Muse AI Recall landing page with the product promise and navigation" width="900"></p>
 
 ### Public recall page
 
-![Muse AI Recall public page explaining personal recall checks](assets/screenshots/recall-page.png)
+<p><img src="assets/readme/recall-page.jpg" alt="Muse AI Recall public page explaining personal recall checks" width="900"></p>
 
 ### Personal recall-check surface
 
-![Muse AI Recall personal recall-check page with links for purchases and brands](assets/screenshots/personal-check.png)
+<p><img src="assets/readme/personal-check.jpg" alt="Muse AI Recall personal recall-check page with links for purchases and brands" width="900"></p>
 
 ## Promotional artwork
 
 The site also includes lightweight, text-free illustrations for the project’s playful tone. They are promotional assets, not screenshots of a working backend.
 
-![Cereal box wearing a detective hat beside a grocery list](site/assets/promo-cereal-detective.png)
-
-![Relaxed alarm bell beside a checked grocery basket](site/assets/promo-alarm-bell.png)
+<table>
+  <tr>
+    <td><img src="assets/readme/promo-cereal-detective.jpg" alt="Cereal box wearing a detective hat beside a grocery list" width="420"></td>
+    <td><img src="assets/readme/promo-alarm-bell.jpg" alt="Relaxed alarm bell beside a checked grocery basket" width="420"></td>
+  </tr>
+</table>
 
 ## Quick start
 
