@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Muse AI Recall symbol">
+  <rect width="64" height="64" rx="18" fill="#fff4df"/>
+  <path d="M32 10 49 17v13c0 11-6.7 19.1-17 24C21.7 49.1 15 41 15 30V17l17-7Z" fill="#ff6b57" stroke="#17233d" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m32 20 3.7 7.5 8.3 1.2-6 5.8 1.4 8.2-7.4-3.9-7.4 3.9 1.4-8.2-6-5.8 8.3-1.2L32 20Z" fill="#ffd166" stroke="#17233d" stroke-width="3" stroke-linejoin="round"/>
+</svg>

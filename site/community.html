@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FedPromptly — Invite Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-deep: #1e1f22;
+    --bg-mid: #2b2d31;
+    --bg-surface: #313338;
+    --bg-float: #232428;
+    --text-normal: #dbdee1;
+    --text-header: #f2f3f5;
+    --text-muted: #949ba4;
+    --blurple: #5865f2;
+    --blurple-hover: #4752c4;
+    --green: #57f287;
+    --border: rgba(255,255,255,0.06);
+    --card-radius: 14px;
+    --banner-h: 128px;
+    --icon-size: 88px;
+  }
+
+  html, body { min-height: 100%; }
+
+  body {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(88,101,242,0.10), transparent 65%),
+      var(--bg-deep);
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    color: var(--text-normal);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ───── OPEN BUTTON ───── */
+  .invite-btn {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px 8px 8px;
+    border-radius: 14px;
+    text-decoration: none;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    box-shadow:
+      0 8px 24px -8px rgba(0,0,0,0.7),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+    transition:
+      transform .2s cubic-bezier(.2,.7,.3,1),
+      border-color .2s ease,
+      box-shadow .2s ease;
+    -webkit-tap-highlight-color: transparent;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .invite-btn::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: 16px;
+    background: linear-gradient(120deg, #5865f2, #00b0f4, #eb459e, #5865f2);
+    background-size: 300% 300%;
+    filter: blur(12px);
+    opacity: 0;
+    transition: opacity .3s ease;
+    animation: flow 8s linear infinite;
+  }
+
+  @keyframes flow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .invite-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(88,101,242,0.5);
+    box-shadow:
+      0 14px 34px -10px rgba(0,0,0,0.85),
+      0 0 0 1px rgba(88,101,242,0.25);
+  }
+
+  .invite-btn:hover::before,
+  .invite-btn:focus-visible::before { opacity: 0.55; }
+
+  .invite-btn:active { transform: translateY(0) scale(0.985); }
+
+  .invite-btn:focus-visible {
+    outline: 2px solid var(--blurple);
+    outline-offset: 4px;
+  }
+
+  .invite-btn .icon {
+    position: relative;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  .invite-btn .icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    transform: scale(0.96);
+  }
+
+  .invite-btn .dot {
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 2.5px solid var(--bg-surface);
+  }
+
+  .invite-btn .dot::after {
+    content: "";
+    position: absolute;
+    inset: -2.5px;
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    animation: ping 2.4s ease-out infinite;
+  }
+
+  @keyframes ping {
+    0%   { transform: scale(0.7); opacity: .6; }
+    70%  { transform: scale(1.7); opacity: 0; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+
+  .invite-btn .label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.15;
+    text-align: left;
+  }
+
+  .invite-btn .name {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-header);
+  }
+
+  .invite-btn .meta {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--text-muted);
+  }
+
+  .invite-btn .arrow {
+    display: grid;
+    place-items: center;
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    transition: transform .2s ease, color .2s ease;
+  }
+
+  .invite-btn .arrow svg { width: 100%; height: 100%; }
+
+  .invite-btn:hover .arrow {
+    color: #fff;
+    transform: translateX(3px);
+  }
+
+  /* ───── MODAL ───── */
+  .invite-modal {
+    width: min(94vw, 520px);
+    max-width: 520px;
+    max-height: 92dvh;
+    margin: auto;
+    padding: 0;
+    border: none;
+    background: transparent;
+    overflow: auto;
+    color: inherit;
+    scrollbar-width: thin;
+  }
+
+  .invite-modal::backdrop {
+    background: rgba(15, 16, 18, 0.74);
+    backdrop-filter: blur(6px);
+  }
+
+  .invite-modal[open] {
+    animation: modalIn .22s ease-out;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(8px) scale(.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-panel {
+    position: relative;
+    width: 100%;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    cursor: pointer;
+    transition: background .18s ease, transform .18s ease;
+  }
+
+  .modal-close:hover {
+    background: rgba(0,0,0,0.7);
+    transform: scale(1.06);
+  }
+
+  .modal-close:focus-visible {
+    outline: 2px solid var(--blurple);
+    outline-offset: 3px;
+  }
+
+  .modal-close svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* ───── FULL DISCORD CARD WIDGET ───── */
+  .discord-card {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    box-shadow:
+      0 24px 60px -12px rgba(0,0,0,0.75),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+    position: relative;
+  }
+
+  .banner {
+    height: var(--banner-h);
+    position: relative;
+    background: linear-gradient(
+      120deg,
+      #232428 0%,
+      #5865f2 30%,
+      #00b0f4 60%,
+      #eb459e 85%,
+      #232428 100%
+    );
+    background-size: 300% 300%;
+    animation: colorFlow 10s ease-in-out infinite;
+    overflow: hidden;
+  }
+
+  .banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.25;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  @keyframes colorFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .icon-wrap {
+    position: absolute;
+    left: 20px;
+    top: calc(var(--banner-h) - 48px);
+    z-index: 5;
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  .server-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px solid var(--bg-surface);
+    background: #ffffff;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.45);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .server-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(0.95);
+  }
+
+  .online-dot {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 4px solid var(--bg-surface);
+    z-index: 6;
+  }
+
+  .card-header {
+    padding: 52px 20px 18px;
+    background: var(--bg-surface);
+    position: relative;
+  }
+
+  .server-name {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--text-header);
+    line-height: 1.15;
+  }
+
+  .stats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .stats i {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    display: inline-block;
+    opacity: 0.6;
+  }
+
+  .stats .tag { color: var(--text-normal); font-weight: 600; }
+
+  .card-body { padding: 0 20px 20px; }
+
+  .description {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 4px;
+  }
+
+  .description strong { color: var(--text-normal); font-weight: 600; }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: var(--bg-mid);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1;
+  }
+
+  .pill .emoji { font-size: 13px; line-height: 1; filter: saturate(0.85); }
+
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.01em;
+  }
+
+  .contacts .label {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 9.5px;
+  }
+
+  .contacts a {
+    color: var(--text-normal);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(219,222,225,0.22);
+    padding-bottom: 1px;
+    transition: color .18s, border-color .18s;
+  }
+
+  .contacts a:hover { color: #fff; border-color: var(--blurple); }
+
+  .join-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px 16px;
+    margin-top: 18px;
+    border-radius: 10px;
+    background: var(--blurple);
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    transition: background .18s ease, transform .18s ease;
+    border: none;
+  }
+
+  .join-btn:hover { background: var(--blurple-hover); transform: translateY(-1px); }
+  .join-btn svg { width: 16px; height: 16px; opacity: 0.9; }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: var(--bg-float);
+    border-top: 1px solid var(--border);
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .card-footer .domain {
+    color: var(--text-normal);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .card-footer .domain:hover { color: #fff; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-muted);
+  }
+
+  .badge svg {
+    width: 12px;
+    height: 12px;
+    stroke: var(--green);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 420px) {
+    :root { --banner-h: 108px; --icon-size: 76px; }
+    .icon-wrap { left: 16px; top: calc(var(--banner-h) - 42px); }
+    .online-dot { width: 18px; height: 18px; border-width: 3.5px; }
+    .card-header { padding: 46px 16px 14px; }
+    .server-name { font-size: 19px; }
+    .card-body { padding: 0 16px 16px; }
+    .card-footer { padding: 10px 16px; }
+
+    .invite-btn { padding: 7px 14px 7px 7px; gap: 10px; }
+    .invite-btn .icon { flex-basis: 36px; width: 36px; height: 36px; }
+    .invite-btn .name { font-size: 13px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .banner,
+    .invite-btn::before,
+    .invite-btn .dot::after,
+    .invite-modal[open] {
+      animation: none !important;
+    }
+    .banner { background-position: 50% 50%; }
+    .invite-btn,
+    .invite-btn .arrow,
+    .modal-close { transition: none; }
+  }
+
+
+  /* ───── EXPANDED COMMUNITY LANDING LAYOUT ───── */
+  .community-shell {
+    width: min(1100px, 100%);
+    display: grid;
+    gap: 28px;
+    padding: 18px 0 42px;
+    position: relative;
+  }
+  .community-shell::before,
+  .community-shell::after {
+    content: "";
+    position: fixed;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: .18;
+    pointer-events: none;
+    z-index: -1;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+  .community-shell::before { top: -80px; left: -80px; background: #5865f2; }
+  .community-shell::after { right: -80px; bottom: -80px; background: #eb459e; animation-delay: -5s; }
+  @keyframes drift { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(26px, 18px, 0) scale(1.12); } }
+  .community-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 22px;
+    padding: 28px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(49,51,56,.94), rgba(35,36,40,.94));
+    box-shadow: 0 24px 70px -28px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.05);
+    animation: rise .65s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .community-kicker { margin: 0 0 9px; color: #aeb6ff; font: 700 11px/1.2 "JetBrains Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
+  .community-hero h1 { color: #f2f3f5; font-size: clamp(30px, 5vw, 52px); line-height: 1.02; letter-spacing: -.05em; max-width: 11ch; }
+  .community-hero p { max-width: 600px; margin-top: 12px; color: #b5bac1; line-height: 1.65; }
+  .community-orbit { width: 132px; height: 132px; border: 1px solid rgba(88,101,242,.5); border-radius: 50%; display: grid; place-items: center; position: relative; animation: spin 16s linear infinite; }
+  .community-orbit::before, .community-orbit::after { content: ""; position: absolute; border-radius: 50%; }
+  .community-orbit::before { width: 10px; height: 10px; top: 9px; background: #57f287; box-shadow: 0 0 16px #57f287; }
+  .community-orbit::after { width: 7px; height: 7px; right: 14px; bottom: 20px; background: #eb459e; box-shadow: 0 0 16px #eb459e; }
+  .community-orbit span { display: grid; place-items: center; width: 66px; height: 66px; border-radius: 22px; background: #5865f2; color: white; font-size: 29px; box-shadow: 0 14px 30px rgba(88,101,242,.45); animation: counter-spin 16s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes counter-spin { to { transform: rotate(-360deg); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .community-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); gap: 20px; align-items: stretch; }
+  .community-panel { padding: 20px; border: 1px solid rgba(255,255,255,.07); border-radius: 16px; background: rgba(49,51,56,.82); box-shadow: 0 18px 45px -25px rgba(0,0,0,.85); animation: rise .65s .1s both; }
+  .community-panel:nth-child(2) { animation-delay: .2s; }
+  .panel-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
+  .panel-heading h2 { color: #f2f3f5; font-size: 17px; }
+  .panel-heading span { color: #949ba4; font: 10px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .12em; }
+  .discord-embed { display: block; width: 100%; min-height: 390px; border: 0; border-radius: 10px; background: #2b2d31; }
+  .destination-list { display: grid; gap: 10px; }
+  .destination { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px; border: 1px solid rgba(255,255,255,.07); border-radius: 11px; background: #2b2d31; color: #dbdee1; text-decoration: none; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+  .destination:hover { transform: translateX(5px); border-color: rgba(88,101,242,.7); background: #313338; }
+  .destination strong { display: block; color: #f2f3f5; font-size: 13px; }
+  .destination small { display: block; margin-top: 3px; color: #949ba4; font-size: 11px; }
+  .destination b { color: #aeb6ff; font-size: 18px; font-weight: 400; }
+  .community-note { color: #949ba4; font-size: 11px; line-height: 1.6; }
+  .community-note a { color: #aeb6ff; }
+  @media (max-width: 760px) {
+    .community-hero { grid-template-columns: 1fr; padding: 22px; }
+    .community-orbit { width: 92px; height: 92px; }
+    .community-orbit span { width: 50px; height: 50px; border-radius: 16px; font-size: 23px; }
+    .community-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .community-shell::before, .community-shell::after, .community-hero, .community-panel, .community-orbit, .community-orbit span { animation: none !important; }
+    .destination { transition: none; }
+  }
+
+</style>
+</head>
+<body>
+  <main class="community-shell" aria-labelledby="community-title">
+    <section class="community-hero">
+      <div>
+        <p class="community-kicker">FedPromptly community</p>
+        <h1 id="community-title">Build, publish, and share the useful weird stuff.</h1>
+        <p>Join the wider FedPromptly ecosystem for browser-native AI tools, publishing experiments, and practical community projects.</p>
+      </div>
+      <div class="community-orbit" aria-hidden="true"><span>✦</span></div>
+    </section>
+
+    <section class="community-grid" aria-label="Community embeds and links">
+      <article class="community-panel">
+        <div class="panel-heading"><h2>Community preview</h2><span>Live embed</span></div>
+        <iframe class="discord-embed" src="https://discord.com/widget?id=1400235929154879490&amp;theme=dark" title="FedPromptly Discord server preview" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        <p class="community-note">The Discord preview is loaded from Discord. If it is unavailable, use the invite card below or visit <a href="https://www.fedpromptly.com/social" target="_blank" rel="noopener">FedPromptly Social</a>.</p>
+      </article>
+      <article class="community-panel">
+        <div class="panel-heading"><h2>Find the project</h2><span>Open links</span></div>
+        <div class="destination-list">
+          <a class="destination" href="https://www.fedpromptly.com/social" target="_blank" rel="noopener"><span><strong>FedPromptly Social</strong><small>Community hub and updates</small></span><b>↗</b></a>
+          <a class="destination" href="https://www.fedpromptly.org" target="_blank" rel="noopener"><span><strong>Explore the ecosystem</strong><small>Projects, tools, and experiments</small></span><b>↗</b></a>
+          <a class="destination" href="https://discord.gg/Jm4XStx4Pf" target="_blank" rel="noopener"><span><strong>Developers Discord</strong><small>Build conversations and help</small></span><b>↗</b></a>
+          <a class="destination" href="mailto:contact@fedpromptly.com"><span><strong>Contact the team</strong><small>contact@fedpromptly.com</small></span><b>✉</b></a>
+        </div>
+      </article>
+    </section>
+
+    <p class="community-note">The compact invite button opens the full social card. External destinations and embeds are controlled by their respective providers.</p>
+
+
+  <!-- COMPACT BUTTON -->
+  <button
+    class="invite-btn"
+    id="openInvite"
+    type="button"
+    aria-haspopup="dialog"
+    aria-controls="inviteModal"
+  >
+    <span class="icon">
+      <img src="https://i.ibb.co/67vXcRnx/icon.png" alt="" />
+      <span class="dot" aria-hidden="true"></span>
+    </span>
+
+    <span class="label">
+      <span class="name">FedPromptly</span>
+      <span class="meta">Open source · AI tools · Publishing</span>
+    </span>
+
+    <span class="arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </span>
+  </button>
+
+  </main>
+
+  <!-- FULL WIDGET MODAL -->
+  <dialog class="invite-modal" id="inviteModal" aria-label="FedPromptly social invite">
+    <div class="modal-panel">
+
+      <button class="modal-close" id="closeInvite" type="button" aria-label="Close invite">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.4" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+
+      <article class="discord-card" aria-label="FedPromptly social invite">
+
+        <div class="banner"></div>
+
+        <div class="icon-wrap">
+          <div class="server-icon">
+            <img src="https://i.ibb.co/67vXcRnx/icon.png" alt="FedPromptly Logo">
+          </div>
+          <div class="online-dot" title="Online"></div>
+        </div>
+
+        <header class="card-header">
+          <h1 class="server-name">FedPromptly</h1>
+          <div class="stats">
+            <span class="tag">Open source</span>
+            <i></i>
+            <span>AI tools</span>
+            <i></i>
+            <span>Publishing</span>
+          </div>
+        </header>
+
+        <main class="card-body">
+
+          <p class="description">
+            Building an open-source ecosystem for <strong>browser-native AI tools</strong> and <strong>cross-platform publishing</strong>.
+          </p>
+
+          <div class="features">
+            <span class="pill"><span class="emoji">🔓</span> Open source</span>
+            <span class="pill"><span class="emoji">🌐</span> Browser-native</span>
+            <span class="pill"><span class="emoji">🤖</span> AI tools</span>
+            <span class="pill"><span class="emoji">📡</span> Cross-platform</span>
+          </div>
+
+          <div class="contacts">
+            <span class="label">Contact</span>
+            <a href="mailto:contact@fedpromptly.com">contact@fedpromptly.com</a>
+            <a href="mailto:careers@fedpromptly.com">careers@fedpromptly.com</a>
+          </div>
+
+          <a class="join-btn" href="https://www.fedpromptly.com/social" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+            Join the community
+          </a>
+
+        </main>
+
+        <footer class="card-footer">
+          <a class="domain" href="https://www.fedpromptly.com" target="_blank" rel="noopener">www.fedpromptly.com</a>
+          <span class="badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18-6-6 6-6"/><path d="m15 6 6 6-6 6"/></svg>
+            Open source
+          </span>
+        </footer>
+
+      </article>
+    </div>
+  </dialog>
+
+  <script>
+    const modal = document.getElementById('inviteModal');
+    const openBtn = document.getElementById('openInvite');
+    const closeBtn = document.getElementById('closeInvite');
+
+    openBtn.addEventListener('click', () => {
+      modal.showModal();
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.close();
+    });
+
+    // Close when clicking the backdrop / outside the card
+    modal.addEventListener('click', (event) => {
+      const rect = modal.getBoundingClientRect();
+      const inside =
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom;
+
+      if (!inside) modal.close();
+    });
+  </script>
+
+</body>
+</html>

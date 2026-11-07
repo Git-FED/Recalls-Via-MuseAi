@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8ea">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <title>Support Muse AI Recall · Age-gated donations</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+</head>
+<body>
+<div class="site-shell">
+  <main class="container page">
+    <nav class="nav reveal">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/favicon.svg" alt=""><span>Muse AI Recall</span></a>
+      <div class="nav-links"><a href="recall/index.html">About</a><a href="recall/how-it-works.html">How it works</a><a class="button secondary" href="recalled/index.html">My recall check</a></div>
+    </nav>
+
+    <section class="page-header reveal">
+      <p class="eyebrow">Support the tiny calm</p>
+      <h1>Help keep the grocery drama low.</h1>
+      <p class="lede">Support fedpromptly and the Muse AI Recall project through one of the options below. This page is age-gated because it contains donation and subscription checkout links.</p>
+    </section>
+
+    <section id="age-gate" class="age-gate reveal delay-1" aria-labelledby="age-title">
+      <div class="age-gate-icon" aria-hidden="true">18+</div>
+      <div>
+        <h2 id="age-title">Adults only, please</h2>
+        <p>Confirm that you are 18 or older before viewing the support options. This is an age self-attestation, not identity verification.</p>
+        <form id="age-form" action="donate.html" method="get">
+          <label class="check-label"><input id="age-confirm" name="age" value="confirmed" type="checkbox" required> I confirm that I am 18 or older.</label>
+          <button class="button" type="submit">Show support options</button>
+        </form>
+        <noscript><p class="small-note">JavaScript is required to reveal the embedded payment options. You can return to the <a href="recall/index.html">public Muse AI Recall page</a>.</p></noscript>
+      </div>
+    </section>
+
+    <section id="support-options" class="support-options" hidden aria-labelledby="support-title">
+      <div class="section-head reveal"><p class="eyebrow">Choose your flavor of support</p><h2 id="support-title">Support fedpromptly</h2><p>Use the option that is most convenient for you. Payment providers handle their own checkout, terms, receipts, and privacy policies.</p></div>
+
+      <article class="donation-card donation-card-featured reveal delay-1">
+        <div class="donation-card-head"><div><span class="support-kicker">Monthly support</span><h3>PayPal subscription</h3><p>Subscribe through the provided PayPal plan for recurring support.</p></div><span class="donation-badge">PayPal</span></div>
+        <div id="paypal-button-container-P-4FD24238VX4902214NK2XP2Y" class="paypal-box"></div>
+        <script src="https://www.paypal.com/sdk/js?client-id=BAA_ndqaWMyQwTnDZ0LXwLQ22jdJo9uxkeXYqmBbF-hD41HMiZ83mvOcx1Kti0b6ZfXfje7Q1ievNaS8Ok&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+        <script>
+          paypal.Buttons({
+            style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
+            createSubscription: function(data, actions) {
+              return actions.subscription.create({ plan_id: 'P-4FD24238VX4902214NK2XP2Y', quantity: 1 });
+            },
+            onApprove: function(data) {
+              var status = document.getElementById('paypal-status');
+              status.hidden = false;
+              status.textContent = 'Thank you. Your PayPal subscription ID is ' + data.subscriptionID + '.';
+            }
+          }).render('#paypal-button-container-P-4FD24238VX4902214NK2XP2Y');
+        </script>
+        <p id="paypal-status" class="success-note" hidden role="status"></p>
+      </article>
+
+      <div class="donation-grid">
+        <article class="donation-card reveal delay-2"><div class="donation-card-head"><div><span class="support-kicker">Community support</span><h3>GitHub Sponsors</h3><p>Support the project from GitHub.</p></div><span class="donation-badge">GitHub</span></div><div class="embed-pad"><iframe src="https://github.com/sponsors/Git-FED/button" title="Sponsor Git-FED" height="32" width="114" style="border:0;border-radius:6px"></iframe></div></article>
+        <article class="donation-card reveal delay-3"><div class="donation-card-head"><div><span class="support-kicker">Quick support</span><h3>Ko-fi</h3><p>Use the floating support button from Ko-fi.</p></div><span class="donation-badge">Ko-fi</span></div><div class="embed-pad"><p>The Ko-fi support bubble will appear after the age gate is accepted.</p></div><script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script><script>kofiWidgetOverlay.draw('fedpromptly', {'type':'floating-chat','floating-chat.donateButton.text':'Support me','floating-chat.donateButton.background-color':'#00b9fe','floating-chat.donateButton.text-color':'#fff'});</script></article>
+        <article class="donation-card reveal delay-1"><div class="donation-card-head"><div><span class="support-kicker">A book-sized boost</span><h3>Buy Me a Coffee</h3><p>Or, in this case, buy a book.</p></div><span class="donation-badge">BMAC</span></div><div class="embed-pad"><a class="external-support" href="https://www.buymeacoffee.com/fedpromptly" target="_blank" rel="noreferrer noopener"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a book&emoji=%F0%9F%93%96&slug=fedpromptly&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a book for fedpromptly"></a></div></article>
+        <article class="donation-card reveal delay-2"><div class="donation-card-head"><div><span class="support-kicker">Crypto support</span><h3>NOWPayments</h3><p>Pay with cryptocurrency through NOWPayments.</p></div><span class="donation-badge">Crypto</span></div><div class="embed-pad"><a class="external-support" href="https://nowpayments.io/payment/?iid=5997958570&source=button" target="_blank" rel="noreferrer noopener"><img src="https://nowpayments.io/images/embeds/payments-button-white.svg" alt="Cryptocurrency and Bitcoin payment button by NOWPayments"></a></div></article>
+        <article class="donation-card reveal delay-3"><div class="donation-card-head"><div><span class="support-kicker">Card support</span><h3>Stripe</h3><p>Use the hosted Stripe buy button.</p></div><span class="donation-badge">Stripe</span></div><div class="embed-pad"><stripe-buy-button buy-button-id="buy_btn_1UJKaaJaRf233kfWKZ81fcIe" publishable-key="pk_live_51UIdAGJaRf233kfWlFacR31IYVGdjCVAttNFzIgQGXQzrUdc894iJcBqamRZNwF11z2AN5kvjyzitor462f2egVI00UmKj0sd8"></stripe-buy-button></div><script async src="https://js.stripe.com/v3/buy-button.js"></script></article>
+        <article class="donation-card reveal delay-1"><div class="donation-card-head"><div><span class="support-kicker">Monthly support</span><h3>Patreon</h3><p>Support the project through the Patreon checkout.</p></div><span class="donation-badge">Patreon</span></div><div class="embed-pad"><a class="button" href="https://www.patreon.com/checkout/16145898/28759937?client_id=yieuxJary8ZL-f8_KU2x6CLgr8nrI8W61ttU1yzFIpPl4KhhtqsjGDWTKdh0e-gx&amp;state=05d4a8d93af762ab4aa99e75678389c6&amp;response_type=code&amp;amt=5.0&amp;pledge_insufficient=True&amp;redirect_uri=https%3A%2F%2Fwww.patreon.com%2Foauth2%2Fbecome-patron%3Fredirect_uri%3Dhttps%253A%252F%252Fgithub.com%252Fsponsors%252Faccounts%252Fpatreon%26client_id%3DyieuxJary8ZL-f8_KU2x6CLgr8nrI8W61ttU1yzFIpPl4KhhtqsjGDWTKdh0e-gx%26min_cents%3D500%26campaign_id%3D16145898%26response_type%3Dcode%26state%3D05d4a8d93af762ab4aa99e75678389c6%26scope%3Didentity%2Bidentity%255Bemail%255D%2Bcampaigns%2Bw%253Acampaigns.webhook%2Bcampaigns.members&amp;start_flow=become_patron&amp;scope=identity+identity%5Bemail%5D+campaigns+w%3Acampaigns.webhook+campaigns.members" target="_blank" rel="noreferrer noopener">Support on Patreon</a></div></article>
+      </div>
+
+      <div class="notice reveal"><strong>Payment note:</strong> These buttons and links are supplied payment-provider integrations. fedpromptly does not receive or store your card details on this static site. Review each provider’s checkout page before completing a donation or subscription.</div>
+    </section>
+
+    <footer>
+<div class="footer-links"><a href="index.html">Site home</a><a href="recall/index.html">Muse AI Recall</a><a href="recalled/index.html">My recall check</a></div>
+      <div class="fed-footer-grid">
+        <section class="footer-group"><h2>Explore FED-OS</h2><ul>
+          <li><a href="https://www.fedpromptly.org" target="_blank" rel="noreferrer noopener">FED-OS ecosystem</a></li>
+          <li><a href="https://www.fedpromptly.com/aid" target="_blank" rel="noreferrer noopener">FED-OS membership</a></li>
+          <li><a href="https://www.jabburr.com/fed-os" target="_blank" rel="noreferrer noopener">Storefront</a></li>
+          <li><a href="https://whop.com/fedpromptly/" target="_blank" rel="noreferrer noopener">Whop</a></li>
+        </ul></section>
+        <section class="footer-group"><h2>Contact</h2><ul>
+          <li><a href="mailto:contact@fedpromptly.com">contact@fedpromptly.com</a></li>
+          <li><a href="mailto:support@fedpromptly.com">support@fedpromptly.com</a></li>
+          <li><a href="mailto:business@fedpromptly.com">business@fedpromptly.com</a></li>
+          <li><a href="mailto:careers@fedpromptly.com">careers@fedpromptly.com</a></li>
+        </ul></section>
+        <section class="footer-group"><h2>Media</h2><ul>
+          <li><a href="https://substack.com/@fedpromptly" target="_blank" rel="noreferrer noopener">Articles</a></li>
+          <li><a href="https://fedpromptly.wordpress.com/" target="_blank" rel="noreferrer noopener">Blog</a></li>
+          <li><a href="https://gitfed.substack.com/" target="_blank" rel="noreferrer noopener">GitFed Blog</a></li>
+          <li><a href="https://www.deviantart.com/fedpromptly" target="_blank" rel="noreferrer noopener">Artwork</a></li>
+        </ul></section>
+        <section class="footer-group"><h2>Support &amp; community</h2><ul>
+          <li><a href="https://www.patreon.com/c/FEDpromptly" target="_blank" rel="noreferrer noopener">Patreon</a></li>
+          <li><a href="https://buymeacoffee.com/fedpromptly" target="_blank" rel="noreferrer noopener">Tips / donations</a></li>
+          <li><a href="https://discord.gg/Jm4XStx4Pf" target="_blank" rel="noreferrer noopener">Developers Discord</a></li>
+          <li><a href="community.html">FedPromptly social invite</a></li>
+          <li><a href="https://bsky.app/profile/fed-os.bsky.social" target="_blank" rel="noreferrer noopener">Bluesky</a></li>
+          <li><a href="https://x.com/Fedpromptly" target="_blank" rel="noreferrer noopener">X / advertising</a></li>
+        </ul></section>
+      </div>
+      <p class="footer-note">Public links only. Private communities and restricted resources are available through their appropriate access checks.</p>
+    </footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var form = document.getElementById('age-form');
+    var gate = document.getElementById('age-gate');
+    var options = document.getElementById('support-options');
+    if (!form || !gate || !options) return;
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!document.getElementById('age-confirm').checked) return;
+      gate.hidden = true;
+      options.hidden = false;
+      options.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.history.replaceState({}, '', 'donate.html?age=confirmed');
+    });
+  }());
+</script>
+</body>
+</html>
